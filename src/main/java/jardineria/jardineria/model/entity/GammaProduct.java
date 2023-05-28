@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "gama_product")
+@Table(name = "gama_producto")
 public class GammaProduct {
 
     @Id
@@ -29,6 +29,6 @@ public class GammaProduct {
     
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name = "picture", length = 5000)
+    @Column(name = "imagen", length = 5000)
     private byte[] picture;
 }
