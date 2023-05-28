@@ -94,7 +94,9 @@ public class ClienteServiceImpl implements IClienteService {
                 clienteSearch.get().setRegion(cliente.getRegion());
                 clienteSearch.get().setPais(cliente.getPais());
                 clienteSearch.get().setCodigoPostal(cliente.getCodigoPostal());
-                clienteSearch.get().setRepVentas(cliente.getRepVentas());
+                if(repVentasId != null) {
+                    clienteSearch.get().setRepVentas(cliente.getRepVentas());
+                }
                 clienteSearch.get().setLimiteCredito(cliente.getLimiteCredito());
 
                 Cliente clienteSaved = clienteRepository.save(clienteSearch.get());
