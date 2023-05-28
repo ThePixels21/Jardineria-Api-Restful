@@ -1,4 +1,4 @@
-package jardineria.jardineria.controller;
+package jardineria.jardineria.controllers;
 
 import java.util.List;
 
