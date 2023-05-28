@@ -23,6 +23,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/api/v1/")
 public class GammaProductRestController {
+    
     public IGammaProductService gamaService;
 
     @GetMapping("gammas")
