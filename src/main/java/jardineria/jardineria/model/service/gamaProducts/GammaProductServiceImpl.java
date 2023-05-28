@@ -11,25 +11,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jardineria.jardineria.model.entity.GamaProduct;
-import jardineria.jardineria.model.repository.IGamaProductRepository;
+import jardineria.jardineria.model.entity.GammaProduct;
+import jardineria.jardineria.model.repository.IGammaProductRepository;
 
 @Service
-public class GamaProductServiceImpl implements IGamaProductService{
+public class GammaProductServiceImpl implements IGammaProductService{
 
-    private final IGamaProductRepository gamaProductRepository;
+    private final IGammaProductRepository gamaProductRepository;
 
-    List<GamaProduct> gamas = new ArrayList<>();
+    List<GammaProduct> gamas = new ArrayList<>();
 
-    public GamaProductServiceImpl (IGamaProductRepository gamaProductRepository) {
+    public GammaProductServiceImpl (IGammaProductRepository gamaProductRepository) {
         this.gamaProductRepository = gamaProductRepository;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public ResponseEntity<List<GamaProduct>> search() {
+    public ResponseEntity<List<GammaProduct>> search() {
         try{
-            gamas = (List<GamaProduct>) gamaProductRepository.findAll();
+            gamas = (List<GammaProduct>) gamaProductRepository.findAll();
             return new ResponseEntity<>(gamas,HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
@@ -39,9 +39,9 @@ public class GamaProductServiceImpl implements IGamaProductService{
     }
 
     @Override
-    public ResponseEntity<List<GamaProduct>> save(GamaProduct gamaProduct) {
+    public ResponseEntity<List<GammaProduct>> save(GammaProduct gamaProduct) {
         try{
-            GamaProduct gamaSaved = gamaProductRepository.save(gamaProduct);
+            GammaProduct gamaSaved = gamaProductRepository.save(gamaProduct);
             gamas.add(gamaSaved);
             return new ResponseEntity<>(gamas,HttpStatus.OK);
         }catch(Exception e){
@@ -51,9 +51,9 @@ public class GamaProductServiceImpl implements IGamaProductService{
     }
 
     @Override
-    public ResponseEntity<GamaProduct> searchById(Long gama) {
+    public ResponseEntity<GammaProduct> searchById(Long gama) {
         try{
-            Optional<GamaProduct> gamas = gamaProductRepository.findById(gama);
+            Optional<GammaProduct> gamas = gamaProductRepository.findById(gama);
             if(gamas.isPresent()){
                 return new ResponseEntity<>(gamas.get(), HttpStatus.OK);
             }else{
@@ -66,15 +66,15 @@ public class GamaProductServiceImpl implements IGamaProductService{
     }
 
     @Override
-    public ResponseEntity<List<GamaProduct>> update(GamaProduct gamaProduct, Long gama) {
+    public ResponseEntity<List<GammaProduct>> update(GammaProduct gamaProduct, Long gama) {
         try {
-            Optional<GamaProduct> gamaSearch = gamaProductRepository.findById(gama);
+            Optional<GammaProduct> gamaSearch = gamaProductRepository.findById(gama);
             if(gamaSearch.isPresent()) {
-                gamaSearch.get().setDescripcionTexto(gamaProduct.getDescripcionTexto());
-                gamaSearch.get().setDescripcionHtml(gamaProduct.getDescripcionHtml());
-                gamaSearch.get().setImagen(gamaProduct.getImagen());
+                gamaSearch.get().setDescriptionText(gamaProduct.getDescriptionText());
+                gamaSearch.get().setDescriptionHtml(gamaProduct.getDescriptionHtml());
+                gamaSearch.get().setPicture(gamaProduct.getPicture());
 
-                GamaProduct gamaSaved = gamaProductRepository.save(gamaSearch.get());
+                GammaProduct gamaSaved = gamaProductRepository.save(gamaSearch.get());
 
                 if(gamaSaved!=null) {
                     gamas.add(gamaSaved);
@@ -92,7 +92,7 @@ public class GamaProductServiceImpl implements IGamaProductService{
     }
 
     @Override
-    public ResponseEntity<List<GamaProduct>> delete(Long gama) {
+    public ResponseEntity<List<GammaProduct>> delete(Long gama) {
         try {
             gamaProductRepository.deleteById(gama);
             return new ResponseEntity<>(gamas, HttpStatus.OK);
