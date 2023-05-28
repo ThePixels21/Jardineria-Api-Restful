@@ -29,7 +29,7 @@ public class Pago {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(name = "codigo_cliente", referencedColumnName = "codigo", nullable = false)
+    @JoinColumn(name = "codigo_cliente", referencedColumnName = "codigo_cliente", nullable = false)
     private Cliente cliente;
 
 }
