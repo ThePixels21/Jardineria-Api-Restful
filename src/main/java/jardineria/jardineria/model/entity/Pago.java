@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "pago",
-indexes = {@Index(name = "index_forma_pago", columnList = "forma_pago")})
+indexes = {@Index(name = "index_forma_pago", columnList = "forma_pago", unique = true)})
 public class Pago {
     
     @Id
@@ -31,7 +31,7 @@ public class Pago {
     @Column(nullable = false)
     private double total;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "codigo_cliente", referencedColumnName = "codigo_cliente", nullable = false)
     private Cliente cliente;
