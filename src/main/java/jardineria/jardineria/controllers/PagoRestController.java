@@ -1,5 +1,6 @@
 package jardineria.jardineria.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -29,12 +30,20 @@ public class PagoRestController {
     }
 
     @PostMapping("pagos")
-    public ResponseEntity<List<Pago>> savePago(@RequestParam Pago pago, @RequestParam("clienteId") Long clienteId) {
+    public ResponseEntity<List<Pago>> savePago(@RequestParam("formaPago") String formaPago, @RequestParam("total") double total, @RequestParam("clienteId") Long clienteId) {
+        Pago pago = new Pago();
+        pago.setFormaPago(formaPago);
+        pago.setFechaPago(new Date());
+        pago.setTotal(total);
         return pagoService.savePago(pago, clienteId);
     }
 
-    @PutMapping("pagos/{id}")
-    public ResponseEntity<List<Pago>> savePago(@RequestParam Pago pago, @RequestParam("clienteId") Long clienteId, @PathVariable Long pagoId) {
+    @PutMapping("pagos/{pagoId}")
+    public ResponseEntity<List<Pago>> updatePago(@RequestParam("formaPago") String formaPago, @RequestParam("total") double total, @RequestParam("clienteId") Long clienteId, @PathVariable Long pagoId) {
+        Pago pago = new Pago();
+        pago.setFormaPago(formaPago);
+        pago.setFechaPago(new Date());
+        pago.setTotal(total);
         return pagoService.updatePago(pago, clienteId, pagoId);
     }
 

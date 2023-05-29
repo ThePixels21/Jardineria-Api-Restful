@@ -2,6 +2,8 @@ package jardineria.jardineria.model.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
@@ -21,6 +23,8 @@ public class Pago {
     @Column(name = "forma_pago", length = 40, nullable = false)
     private String formaPago;
 
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_pago", nullable = false)
     private Date fechaPago;
 
