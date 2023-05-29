@@ -105,9 +105,7 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
                 empleadoSearch.get().setExtension(empleado.getExtension());
                 empleadoSearch.get().setEmail(empleado.getEmail());
                 empleadoSearch.get().setOficina(empleado.getOficina());
-                if(jefeId != null) {
-                    empleadoSearch.get().setJefe(empleado.getJefe());
-                }
+                empleadoSearch.get().setJefe(empleado.getJefe());
                 empleadoSearch.get().setPuesto(empleado.getPuesto());
                 
                 Empleado empleadoSaved = empleadoRepository.save(empleadoSearch.get());
