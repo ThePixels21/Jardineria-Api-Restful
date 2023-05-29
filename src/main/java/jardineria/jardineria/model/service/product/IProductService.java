@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-import jardineria.jardineria.model.entity.GammaProduct;
 import jardineria.jardineria.model.entity.Product;
 
 public interface IProductService {
