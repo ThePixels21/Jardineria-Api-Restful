@@ -48,7 +48,7 @@ public class Cliente {
     @Column(name = "codigo_postal", length = 10, nullable = true)
     private String codigoPostal;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "codigo_empleado_rep_ventas", referencedColumnName = "codigo_empleado", nullable = true)
     private Empleado repVentas;
