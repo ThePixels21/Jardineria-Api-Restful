@@ -14,7 +14,7 @@ public interface IOrderDetailsService  {
 
     public ResponseEntity<OrderDetails> searchById(Long id);
 
-    public ResponseEntity<List<OrderDetails>> update(OrderDetails order,Long id);
+    public ResponseEntity<List<OrderDetails>> update(OrderDetails orderDetail,Long orderId,Long productId,Long orderDetailId);
 
     public ResponseEntity<List<OrderDetails>> delete(Long id);
 }
