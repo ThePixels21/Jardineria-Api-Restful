@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +18,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "producto",indexes = @Index(name = "idx_name", columnList = "name", unique = true))
+@Table(name = "producto",indexes = @Index(name = "idx_nombre", columnList = "nombre", unique = true))
 public class Product {
     
     @Id
@@ -31,7 +32,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @Column(name = "gama")
+    @JoinColumn(name = "gama_id", referencedColumnName = "gama")
     private GammaProduct gamma;
 
     @Column(name = "dimensiones", length = 25)
