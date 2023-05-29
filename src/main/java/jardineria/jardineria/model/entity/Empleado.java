@@ -32,7 +32,7 @@ public class Empleado {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(name = "codigo_oficina", referencedColumnName = "codigo_oficina")
+    @JoinColumn(name = "codigo_oficina", referencedColumnName = "codigo_oficina", nullable = false)
     private Oficina oficina;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
