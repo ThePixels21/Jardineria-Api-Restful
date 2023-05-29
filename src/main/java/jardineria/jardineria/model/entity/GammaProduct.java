@@ -13,22 +13,22 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "gama_product")
+@Table(name = "gama_producto")
 public class GammaProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "gama", length = 50)
-    private Long gamma;
+    @Column(name = "gama", length = 50,nullable = false)
+    private String gamma;
 
-    @Column(name = "descripcion_texto")
+    @Column(name = "descripcion_texto",nullable = true)
     private String descriptionText;
 
-    @Column(name = "descripcion_html")
+    @Column(name = "descripcion_html",nullable = true)
     private String descriptionHtml;
     
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name = "picture", length = 5000)
+    @Column(name = "picture", length = 5000,nullable = true)
     private byte[] picture;
 }

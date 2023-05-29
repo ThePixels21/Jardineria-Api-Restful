@@ -38,7 +38,7 @@ public class ProductServiceImpl implements IProductService{
     }
 
     @Override
-    public ResponseEntity<List<Product>> save(Product product,Long gammaId) {
+    public ResponseEntity<List<Product>> save(Product product,String gammaId) {
         try {
             Optional<GammaProduct> gamma = gammaRepository.findById(gammaId);
             if (gamma.isPresent()) {
@@ -77,8 +77,16 @@ public class ProductServiceImpl implements IProductService{
     }
 
     @Override
-    public ResponseEntity<List<Product>> update(Product product, Long id) {
+    public ResponseEntity<List<Product>> update(Product product, String gammaId,Long id) {
         try {
+
+            Optional<GammaProduct> gamma = gammaRepository.findById(gammaId);
+            if(gamma.isPresent()){
+                product.setGamma(gamma.get());
+            }else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            
             Optional<Product> productSearch = productRepository.findById(id);
             if(productSearch.isPresent()) {
                 productSearch.get().setName(product.getName());

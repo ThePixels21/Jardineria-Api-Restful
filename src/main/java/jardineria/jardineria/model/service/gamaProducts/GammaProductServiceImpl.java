@@ -51,7 +51,7 @@ public class GammaProductServiceImpl implements IGammaProductService{
     }
 
     @Override
-    public ResponseEntity<GammaProduct> searchById(Long gama) {
+    public ResponseEntity<GammaProduct> searchById(String gama) {
         try{
             Optional<GammaProduct> gamas = gamaProductRepository.findById(gama);
             if(gamas.isPresent()){
@@ -66,7 +66,7 @@ public class GammaProductServiceImpl implements IGammaProductService{
     }
 
     @Override
-    public ResponseEntity<List<GammaProduct>> update(GammaProduct gamaProduct, Long gama) {
+    public ResponseEntity<List<GammaProduct>> update(GammaProduct gamaProduct, String gama) {
         try {
             Optional<GammaProduct> gamaSearch = gamaProductRepository.findById(gama);
             if(gamaSearch.isPresent()) {
@@ -92,7 +92,7 @@ public class GammaProductServiceImpl implements IGammaProductService{
     }
 
     @Override
-    public ResponseEntity<List<GammaProduct>> delete(Long gama) {
+    public ResponseEntity<List<GammaProduct>> delete(String gama) {
         try {
             gamaProductRepository.deleteById(gama);
             return new ResponseEntity<>(gamas, HttpStatus.OK);

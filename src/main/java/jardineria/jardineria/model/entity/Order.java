@@ -23,29 +23,27 @@ public class Order {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_pedido")
+    @Column(name = "codigo_pedido",nullable = false)
     private Long id;
 
-    @Column(name = "fecha_pedido")
-    @NotNull
+    @Column(name = "fecha_pedido",nullable = false)
     private Date orderDate;
 
-    @Column(name = "fecha_esperada")
-    @NotNull
+    @Column(name = "fecha_esperada",nullable = false)
     private Date waitDate;
 
-    @Column(name = "fecha_entrega")
-    private Date deadline;
+    @Column(name = "fecha_entrega",nullable = true)
+    private Date deliveryDate;
 
-    @Column(name = "estado",length = 15)
+    @Column(name = "estado",length = 15,nullable = false)
     private String status;
 
-    @Column(name = "comentarios")
+    @Column(name = "comentarios",nullable = true)
     private String coments;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(name = "codigo_empleado_rep_ventas", referencedColumnName = "codigo_empleado", nullable = true)
+    @JoinColumn(name = "codigo_empleado_rep_ventas", referencedColumnName = "codigo_empleado", nullable = false)
     private Cliente customer;
 
 

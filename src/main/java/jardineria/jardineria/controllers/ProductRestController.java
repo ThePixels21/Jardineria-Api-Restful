@@ -32,9 +32,9 @@ public class ProductRestController {
     
     @PostMapping("products")
     @Transactional
-    public ResponseEntity<List<Product>> saveProduct(@RequestParam("name") String name,@RequestParam("gammaId") Long gammaId , @RequestParam("dimentions") String dimentions, 
-    @RequestParam("supplier") String supplier,@RequestParam("description") String description,@RequestParam("amountStock") int amountStock,
-    @RequestParam("priceSell") double priceSell,@RequestParam("priceSupplier") double priceSupplier) throws Exception {
+    public ResponseEntity<List<Product>> saveProduct(@RequestParam("name") String name,@RequestParam("gammaId") String gammaId , String dimentions, 
+    String supplier, String description,@RequestParam("amountStock") int amountStock, @RequestParam("priceSell") double priceSell,
+    double priceSupplier) throws Exception {
         Product product = new Product();
         product.setName(name);
         product.setDimentions(dimentions);
@@ -48,9 +48,9 @@ public class ProductRestController {
 
     @PutMapping("products/{id}")
     @Transactional
-    public ResponseEntity<List<Product>> updateProduct(@RequestParam("name") String name,@RequestParam("gammaId") Long gammaId ,@RequestParam("dimentions") String dimentions, 
-    @RequestParam("supplier") String supplier,@RequestParam("description") String description,@RequestParam("amountStock") int amountStock,
-    @RequestParam("priceSell") double priceSell,@RequestParam("priceSupplier") double priceSupplier) throws Exception {
+    public ResponseEntity<List<Product>> updateProduct(@RequestParam("name") String name,@RequestParam("gammaId") String gammaId , String dimentions, 
+    String supplier, String description,@RequestParam("amountStock") int amountStock,
+    @RequestParam("priceSell") double priceSell,double priceSupplier,@PathVariable Long id) throws Exception {
         Product product = new Product();
         product.setName(name);
         product.setDimentions(dimentions);
@@ -59,7 +59,7 @@ public class ProductRestController {
         product.setAmountStock(amountStock);
         product.setPriceSell(priceSell);
         product.setPriceSuppler(priceSupplier);
-        return productService.update(product, gammaId);
+        return productService.update(product, gammaId,id);
     }
 
     @GetMapping("products/{id}")

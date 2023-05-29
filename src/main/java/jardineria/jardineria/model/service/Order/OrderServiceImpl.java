@@ -92,7 +92,7 @@ public class OrderServiceImpl implements IOrderService{
             if(orderSearch.isPresent()) {
                 orderSearch.get().setOrderDate(order.getOrderDate());;
                 orderSearch.get().setWaitDate(order.getWaitDate());;
-                orderSearch.get().setDeadline(order.getDeadline());;
+                orderSearch.get().setDeliveryDate(order.getDeliveryDate());
                 orderSearch.get().setStatus(order.getStatus());;
                 orderSearch.get().setComents(order.getComents());
 

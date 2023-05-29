@@ -11,9 +11,9 @@ public interface IGammaProductService {
 
     public ResponseEntity<List<GammaProduct>> save(GammaProduct gamaProduct);
 
-    public ResponseEntity<GammaProduct> searchById(Long gama);
+    public ResponseEntity<GammaProduct> searchById(String gama);
 
-    public ResponseEntity<List<GammaProduct>> update(GammaProduct gamaProduct,Long gama);
+    public ResponseEntity<List<GammaProduct>> update(GammaProduct gamaProduct,String gama);
 
-    public ResponseEntity<List<GammaProduct>> delete(Long gama);
+    public ResponseEntity<List<GammaProduct>> delete(String gama);
 }

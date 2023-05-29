@@ -1,5 +1,6 @@
 package jardineria.jardineria.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,15 @@ public class OrderRestController {
     }
 
     @PostMapping("orders")
-    public ResponseEntity<List<Order>> saveOficina(@RequestParam("order") Order order,@RequestParam("customerId") Long customerId){
+    public ResponseEntity<List<Order>> saveOficina(@RequestParam("orderDate") Date orderDate,@RequestParam("watitDate") Date waitDate,Date deliveryDate,@RequestParam("status") String status,String comments,@RequestParam("customerId") Long customerId){
+        
+        Order order = new Order();
+        order.setOrderDate(orderDate);
+        order.setWaitDate(waitDate);
+        order.setDeliveryDate(deliveryDate);
+        order.setStatus(status);
+        order.setComents(comments);
+        
         return orderService.save(order, customerId);
     }
 
@@ -39,8 +48,17 @@ public class OrderRestController {
     }
 
     @PutMapping("orders/{id}")
-    public ResponseEntity<List<Order>> updateOficina(@RequestParam("order") Order order, @PathVariable Long id,@RequestParam("clienteId") Long clienteId) {
-        return orderService.update(order, id, clienteId);
+    public ResponseEntity<List<Order>> updateOficina(@RequestParam("orderDate") Date orderDate,@RequestParam("watitDate") Date waitDate,Date deliveryDate,@RequestParam("status") String status,String comments,@RequestParam("customerId") Long customerId,@PathVariable Long id) {
+        
+        Order order = new Order();
+        order.setOrderDate(orderDate);
+        order.setWaitDate(waitDate);
+        order.setDeliveryDate(deliveryDate);
+        order.setStatus(status);
+        order.setComents(comments);
+        
+        
+        return orderService.update(order, customerId, id);
     }
 
     @DeleteMapping("orders/{id}")
