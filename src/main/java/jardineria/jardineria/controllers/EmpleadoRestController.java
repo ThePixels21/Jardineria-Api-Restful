@@ -29,12 +29,26 @@ public class EmpleadoRestController {
     }
 
     @PostMapping("empleados")
-    public ResponseEntity<List<Empleado>> saveEmpleado(@RequestParam Empleado empleado, @RequestParam("oficinaId") Long oficinaId, @RequestParam("jefeId") Long jefeId) {
+    public ResponseEntity<List<Empleado>> saveEmpleado(@RequestParam("nombre") String nombre, @RequestParam("apellido1") String apellido1, String apellido2, @RequestParam("extension") String extension, @RequestParam("email") String email, @RequestParam("puesto") String puesto, @RequestParam("oficinaId") Long oficinaId, Long jefeId) {
+        Empleado empleado = new Empleado();
+        empleado.setNombre(nombre);
+        empleado.setApellido1(apellido1);
+        empleado.setApellido2(apellido2);
+        empleado.setExtension(extension);
+        empleado.setEmail(email);
+        empleado.setPuesto(puesto);
         return empleadoService.saveEmpleado(empleado, oficinaId, jefeId);
     }
 
-    @PutMapping("empleados/{id}")
-    public ResponseEntity<List<Empleado>> saveEmpleado(@RequestParam Empleado empleado, @RequestParam("oficinaId") Long oficinaId, @RequestParam("jefeId") Long jefeId, @PathVariable Long empleadoId) {
+    @PutMapping("empleados/{empleadoId}")
+    public ResponseEntity<List<Empleado>> saveEmpleado(@RequestParam("nombre") String nombre, @RequestParam("apellido1") String apellido1, String apellido2, @RequestParam("extension") String extension, @RequestParam("email") String email, @RequestParam("puesto") String puesto, @RequestParam("oficinaId") Long oficinaId, Long jefeId, @PathVariable Long empleadoId) {
+        Empleado empleado = new Empleado();
+        empleado.setNombre(nombre);
+        empleado.setApellido1(apellido1);
+        empleado.setApellido2(apellido2);
+        empleado.setExtension(extension);
+        empleado.setEmail(email);
+        empleado.setPuesto(puesto);
         return empleadoService.updateEmpleado(empleado, oficinaId, jefeId, empleadoId);
     }
 
