@@ -79,6 +79,8 @@ public class ClienteServiceImpl implements IClienteService {
                 } else {
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
                 }
+            } else {
+                cliente.setRepVentas(null);
             }
 
             Optional<Cliente> clienteSearch = clienteRepository.findById(clienteId);
@@ -94,9 +96,7 @@ public class ClienteServiceImpl implements IClienteService {
                 clienteSearch.get().setRegion(cliente.getRegion());
                 clienteSearch.get().setPais(cliente.getPais());
                 clienteSearch.get().setCodigoPostal(cliente.getCodigoPostal());
-                if(repVentasId != null) {
-                    clienteSearch.get().setRepVentas(cliente.getRepVentas());
-                }
+                clienteSearch.get().setRepVentas(cliente.getRepVentas());
                 clienteSearch.get().setLimiteCredito(cliente.getLimiteCredito());
 
                 Cliente clienteSaved = clienteRepository.save(clienteSearch.get());
