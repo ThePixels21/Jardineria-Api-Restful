@@ -1,4 +1,4 @@
-package jardineria.jardineria.model.service;
+package jardineria.jardineria.model.service.Order;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface IOrderService {
 
     public ResponseEntity<Order> searchById(Long id);
 
-    public ResponseEntity<List<Order>> update(Order order,Long id);
+    public ResponseEntity<List<Order>> update(Order order,Long clienteId,Long id);
 
     public ResponseEntity<List<Order>> delete(Long id);
 }
