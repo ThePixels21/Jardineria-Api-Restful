@@ -86,6 +86,8 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
                 } else {
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
                 }
+            } else {
+                empleado.setJefe(null);
             }
 
             Optional<Oficina> oficina = oficinaRepository.findById(oficinaId);
