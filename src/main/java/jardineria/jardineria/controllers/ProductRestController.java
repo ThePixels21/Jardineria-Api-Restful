@@ -50,7 +50,7 @@ public class ProductRestController {
     @Transactional
     public ResponseEntity<List<Product>> updateProduct(@RequestParam("name") String name,@RequestParam("gammaId") Long gammaId ,@RequestParam("dimentions") String dimentions, 
     @RequestParam("supplier") String supplier,@RequestParam("description") String description,@RequestParam("amountStock") int amountStock,
-    @RequestParam("priceSell") double priceSell,@RequestParam("priceSupplier") double priceSupplier) throws Exception {
+    @RequestParam("priceSell") double priceSell,@RequestParam("priceSupplier") double priceSupplier,@PathVariable Long id) throws Exception {
         Product product = new Product();
         product.setName(name);
         product.setDimentions(dimentions);
@@ -59,7 +59,7 @@ public class ProductRestController {
         product.setAmountStock(amountStock);
         product.setPriceSell(priceSell);
         product.setPriceSuppler(priceSupplier);
-        return productService.update(product, gammaId);
+        return productService.update(product, gammaId,id);
     }
 
     @GetMapping("products/{id}")
