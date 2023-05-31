@@ -31,7 +31,6 @@ public class ProductRestController {
     }
     
     @PostMapping("products")
-    @Transactional
     public ResponseEntity<List<Product>> saveProduct(@RequestParam("name") String name,@RequestParam("gammaId") String gammaId , String dimentions, 
     String supplier, String description,@RequestParam("amountStock") int amountStock, @RequestParam("priceSell") double priceSell,
     double priceSupplier) throws Exception {
@@ -47,18 +46,22 @@ public class ProductRestController {
     }
 
     @PutMapping("products/{id}")
-    @Transactional
     public ResponseEntity<List<Product>> updateProduct(@RequestParam("name") String name,@RequestParam("gammaId") String gammaId , String dimentions, 
     String supplier, String description,@RequestParam("amountStock") int amountStock,
-    @RequestParam("priceSell") double priceSell,double priceSupplier,@PathVariable Long id) throws Exception {
+    @RequestParam("priceSell") String priceSell,String priceSupplier,@PathVariable Long id) throws Exception {
         Product product = new Product();
         product.setName(name);
         product.setDimentions(dimentions);
         product.setSupplier(supplier);
         product.setDescription(description);
         product.setAmountStock(amountStock);
-        product.setPriceSell(priceSell);
-        product.setPriceSuppler(priceSupplier);
+        product.setPriceSell(Double.parseDouble(priceSell));
+        
+        if(priceSupplier == null){
+            product.setPriceSuppler(0);
+        }else{
+            product.setPriceSuppler(Double.parseDouble(priceSupplier));
+        }
         return productService.update(product, gammaId,id);
     }
 
@@ -69,7 +72,6 @@ public class ProductRestController {
     }
 
     @DeleteMapping("products/{id}")
-    @Transactional
     public ResponseEntity<List<Product>> deleteProduct(@PathVariable Long id) {
         return productService.delete(id);
     }

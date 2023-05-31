@@ -27,14 +27,12 @@ public class GammaProductRestController {
     public IGammaProductService gamaService;
 
     @GetMapping("gammas")
-    @Transactional(readOnly = true)
     public ResponseEntity<List<GammaProduct>> getAllProducts() {
         return gamaService.search();
     }
     
     @PostMapping("gammas")
-    @Transactional
-    public ResponseEntity<List<GammaProduct>> saveProduct(@RequestParam("picture") MultipartFile picture, @RequestParam("descriptionText") String descriptionText, @RequestParam("descriptionHtml") String descriptionHtml) throws Exception {
+    public ResponseEntity<List<GammaProduct>> saveProduct( MultipartFile picture, String descriptionText, String descriptionHtml) throws Exception {
         GammaProduct gama = new GammaProduct();
         gama.setDescriptionText(descriptionText);
         gama.setDescriptionHtml(descriptionHtml);
@@ -43,7 +41,6 @@ public class GammaProductRestController {
     }
 
     @PutMapping("gammas/{id}")
-    @Transactional
     public ResponseEntity<List<GammaProduct>> updateProduct(@RequestParam("picture") MultipartFile picture, @RequestParam("descriptionText") String descriptionText, @RequestParam("descriptionHtml") String descriptionHtml, @PathVariable String id) throws Exception {
         GammaProduct gama = new GammaProduct();
         gama.setDescriptionText(descriptionText);
@@ -53,13 +50,11 @@ public class GammaProductRestController {
     }
 
     @GetMapping("gammas/{id}")
-    @Transactional(readOnly = true)
     public ResponseEntity<GammaProduct> searchProductById(@PathVariable String id) {
         return gamaService.searchById(id);
     }
 
     @DeleteMapping("gammas/{id}")
-    @Transactional
     public ResponseEntity<List<GammaProduct>> deleteProduct(@PathVariable String id) {
         return gamaService.delete(id);
     }

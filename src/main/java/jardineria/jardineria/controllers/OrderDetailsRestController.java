@@ -25,15 +25,15 @@ public class OrderDetailsRestController {
     public IOrderDetailsService orderDetailService;
 
     @GetMapping("orderDetails")
-    @Transactional(readOnly = true)
     public ResponseEntity<List<OrderDetails>> getAllProducts() {
         return orderDetailService.search();
     }
     
     @PostMapping("orderDetails")
-    @Transactional
-    public ResponseEntity<List<OrderDetails>> saveProduct(@RequestParam("orderId") Long orderId,@RequestParam("productId") Long productId , @RequestParam("amount") int amount, 
-    @RequestParam("price") double price,@RequestParam("lineNumber") double lineNumber) throws Exception {
+    public ResponseEntity<List<OrderDetails>> saveProduct(@RequestParam("orderId") Long orderId,
+    @RequestParam("productId") Long productId , @RequestParam("amount") int amount, 
+    @RequestParam("price") double price,
+    @RequestParam("lineNumber") double lineNumber) throws Exception {
         OrderDetails orderDetail = new OrderDetails();
         orderDetail.setAmount(amount);
         orderDetail.setPrice(price);
@@ -42,7 +42,6 @@ public class OrderDetailsRestController {
     }
 
     @PutMapping("orderDetails/{id}")
-    @Transactional
     public ResponseEntity<List<OrderDetails>> updateProduct(@RequestParam("orderId") Long orderId,@RequestParam("productId") Long productId , @RequestParam("amount") int amount, 
     @RequestParam("price") double price,@RequestParam("lineNumber") double lineNumber,@PathVariable Long id) throws Exception {
         OrderDetails orderDetail = new OrderDetails();
@@ -53,7 +52,6 @@ public class OrderDetailsRestController {
     }
 
     @GetMapping("orderDetails/{id}")
-    @Transactional(readOnly = true)
     public ResponseEntity<OrderDetails> searchProductById(@PathVariable Long id) {
         return orderDetailService.searchById(id);
     }
