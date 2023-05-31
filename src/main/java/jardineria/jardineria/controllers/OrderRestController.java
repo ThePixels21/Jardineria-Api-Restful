@@ -1,5 +1,7 @@
 package jardineria.jardineria.controllers;
 
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -30,14 +32,26 @@ public class OrderRestController {
     }
 
     @PostMapping("orders")
-    public ResponseEntity<List<Order>> saveOficina(@RequestParam("orderDate") Date orderDate,@RequestParam("watitDate") Date waitDate,Date deliveryDate,@RequestParam("status") String status,String comments,@RequestParam("customerId") Long customerId){
-        
+    public ResponseEntity<List<Order>> saveOficina(@RequestParam("waitDate") String waitDate,String deliveryDate,
+    @RequestParam("status") String status,String comments,@RequestParam("customerId") Long customerId) throws Exception{
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date aux1 = dateFormat.parse(waitDate);
+
         Order order = new Order();
-        order.setOrderDate(orderDate);
-        order.setWaitDate(waitDate);
-        order.setDeliveryDate(deliveryDate);
+
+        order.setOrderDate(new Date());
+        order.setWaitDate(aux1);
+
+        if(deliveryDate == null){
+            order.setDeliveryDate(null);
+        }else{
+            Date aux2 = dateFormat.parse(deliveryDate);
+            order.setDeliveryDate(aux2);
+        }
         order.setStatus(status);
         order.setComents(comments);
+        
         
         return orderService.save(order, customerId);
     }
@@ -48,12 +62,23 @@ public class OrderRestController {
     }
 
     @PutMapping("orders/{id}")
-    public ResponseEntity<List<Order>> updateOficina(@RequestParam("orderDate") Date orderDate,@RequestParam("watitDate") Date waitDate,Date deliveryDate,@RequestParam("status") String status,String comments,@RequestParam("customerId") Long customerId,@PathVariable Long id) {
+    public ResponseEntity<List<Order>> updateOficina(@RequestParam("waitDate") String waitDate,String deliveryDate,
+    @RequestParam("status") String status,String comments,@RequestParam("customerId") Long customerId,
+    @PathVariable Long id) throws Exception {
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date aux1 = dateFormat.parse(waitDate);
         
         Order order = new Order();
-        order.setOrderDate(orderDate);
-        order.setWaitDate(waitDate);
-        order.setDeliveryDate(deliveryDate);
+        order.setOrderDate(new Date());
+        order.setWaitDate(aux1);
+
+        if(deliveryDate == null){
+            order.setDeliveryDate(null);
+        }else{
+            Date aux2 = dateFormat.parse(deliveryDate);
+            order.setDeliveryDate(aux2);
+        }
         order.setStatus(status);
         order.setComents(comments);
         

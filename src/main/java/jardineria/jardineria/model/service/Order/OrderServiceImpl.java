@@ -40,9 +40,9 @@ public class OrderServiceImpl implements IOrderService{
     @Override
     public ResponseEntity<List<Order>> save(Order order, Long customerId) {
         try {
-            Optional<Order> aux = orderRepository.findById(customerId);
-            if (aux.isPresent()) {
-                order.setCustomer(order.getCustomer());
+            Optional<Cliente> cliente = clienteRepository.findById(customerId);
+            if (cliente.isPresent()) {
+                order.setCustomer(cliente.get());
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
@@ -87,7 +87,6 @@ public class OrderServiceImpl implements IOrderService{
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-
             Optional<Order> orderSearch = orderRepository.findById(id);
             if(orderSearch.isPresent()) {
                 orderSearch.get().setOrderDate(order.getOrderDate());;
@@ -95,6 +94,7 @@ public class OrderServiceImpl implements IOrderService{
                 orderSearch.get().setDeliveryDate(order.getDeliveryDate());
                 orderSearch.get().setStatus(order.getStatus());;
                 orderSearch.get().setComents(order.getComents());
+                orderSearch.get().setCustomer(order.getCustomer());
 
                 Order orderSaved = orderRepository.save(orderSearch.get());
 
